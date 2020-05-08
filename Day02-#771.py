@@ -28,6 +28,11 @@ class Solution:
         return result
 
 
+class Solution1:
+    def numJewelsInStones(self, J: str, S: str) -> int:
+        return len([i for i in S if i in J])
+
+
 if __name__ == "__main__":
-    S = Solution()
+    S = Solution1()
     print(S.numJewelsInStones('aA', 'aAAbbbb'))
