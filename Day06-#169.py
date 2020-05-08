@@ -28,7 +28,6 @@ class Solution:
 class Solution1:
     def majorityElement(self, nums):
         counts = Counter(nums)
-        print(counts.get)
         return max(counts.keys(), key=counts.get)
 
 # Sorting
