@@ -18,7 +18,7 @@ S and J will consist of letters and have length at most 50.
 The characters in J are distinct.
 """
 
-
+#Time Complex: O(n)
 class Solution:
     def numJewelsInStones(self, J: str, S: str) -> int:
         result = 0

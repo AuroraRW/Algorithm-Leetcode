@@ -20,18 +20,57 @@ Output: false
 Note:
 The number of nodes in the tree will be between 2 and 100.
 Each node has a unique integer value from 1 to 100.
-
 """
 
+
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 
 
 class Solution:
+    def __init__(self):
+        self.xLevel=-1
+        self.yLevel=-1
+        self.xParent=None
+        self.yParent=None
+
     def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
 
-        return
+        #we do not need to create tree in leetcode
+        def add(arr, root, i, n):
+            if i < n:
+                root = TreeNode(arr[i])
+                # insert left child
+                root.left = add(arr, root.left, 2 * i + 1, n)
+                # insert right child
+                root.right = add(arr, root.right, 2 * i + 2, n)
+            return root
+        def dfs(root, x, y, level, parent):
+            if root == None:
+                return
+            if root.val == x:
+                xLevel = level
+                xParent = parent
+            if root.val == y:
+                yLevel = level
+                yParent = parent
+            if (root.left != None):
+                dfs(root.left, x, y, level+1, root.val)
+            if (root.right != None):
+                dfs(root.right, x, y, level+1, root.val)
+
+        r = add(root, None, 0, len(root))
+        dfs(r, x, y, 1, None)
+        if self.xLevel==self.yLevel and self.xParent != self.yParent:
+            return True
+        else:
+            return False
+
+
+if __name__=="__main__":
+    S=Solution()
+    print(S.isCousins([1,2,3,None,4,None,5], 5, 4))
