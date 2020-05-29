@@ -36,6 +36,7 @@ class Solution:
 
         if k > 0:
             stack = stack[:len(stack) - k]
+
         # for 0200 output 200
         return str(int(''.join(stack)))
 
