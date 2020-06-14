@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 //    1 <= nums[i] <= 10^3
 
 
-namespace Algorithm_Leetcode_CSharp__Easy
+namespace Algorithm_Leetcode_CSharp
 {
     class Problem1470
     {

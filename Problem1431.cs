@@ -32,7 +32,7 @@ using System.Threading.Tasks;
 //    1 <= candies[i] <= 100
 //    1 <= extraCandies <= 50
 
-namespace Algorithm_Leetcode_CSharp__Easy
+namespace Algorithm_Leetcode_CSharp
 {
     class Problem1431
     {

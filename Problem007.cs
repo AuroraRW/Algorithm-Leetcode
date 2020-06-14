@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 //Note:
 //Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−2^31,  2^31 − 1]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
 
-namespace Algorithm_Leetcode_CSharp__Easy
+namespace Algorithm_Leetcode_CSharp
 {
     class Problem007
     {

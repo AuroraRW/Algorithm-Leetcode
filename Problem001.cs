@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 //Because nums[0] + nums[1] = 2 + 7 = 9,
 //return [0, 1].
 
-namespace Algorithm_Leetcode_CSharp__Easy
+namespace Algorithm_Leetcode_CSharp
 {
     class Problem001
     {
