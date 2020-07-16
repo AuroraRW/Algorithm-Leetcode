@@ -30,7 +30,52 @@ Follow up:
 Can you solve it using O(1) (i.e. constant) memory?
 #### Python
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        if head == None:
+            return False
+        l1 = head
+        l2 = head.next
+        while l1 and l2 and l2.next :
+            if l1 == l2: 
+                return True
+            l1 = l1.next
+            l2 = l2.next.next
+        return False
 ```
 #### Csharp
 ```csharp
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public bool HasCycle(ListNode head) {
+        if (head == null) {
+            return false;
+        }
+        ListNode l1 = head, l2 = head.next;
+        while (l1 != null && l2 != null&& l2.next != null) {
+            if (l1 == l2) {
+                return true;
+        }
+        l1 = l1.next;
+        l2 = l2.next.next;
+        }
+        return false;
+    }
+}
 ```
