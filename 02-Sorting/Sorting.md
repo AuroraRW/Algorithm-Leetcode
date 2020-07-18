@@ -1,6 +1,6 @@
 ### Sorting Algorithm
-![title](#01.png)
-![title](#02.png)
+![title](P01.png)
+![title](P02.png)
 ### 1 Bubble Sort
 #### Python
 ```python
@@ -131,6 +131,10 @@ def QuickSort(arry:list, left:int, right:int):
         QuickSort(arry,left,center-1)
         QuickSort(arry,center+1,right)
 ```
+### 7 Heap Sort
+Heap:  
+Complete binary tree  
+parent > children
 
 #### Reference
 https://www.runoob.com/w3cnote/ten-sorting-algorithm.html
