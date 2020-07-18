@@ -24,6 +24,27 @@ Note:
     The length of all the strings in the input won't exceed 1,000.
 #### Python
 ```python
+class Solution:
+    def findLongestWord(self, s: str, d: List[str]) -> str:
+        longestWord = ""
+        for target in d:
+            l1 = len(longestWord)
+            l2 = len(target)
+            if l1 > l2 or (l1 == l2 and longestWord < target):
+                continue
+            if self.isSubstr(s, target):       
+                longestWord = target
+
+        return longestWord
+
+    def isSubstr(self,s, target):
+        i = 0
+        j = 0
+        while i < len(s) and j < len(target):
+            if s[i] == target[j]:
+                j=j+1
+            i=i+1
+        return j == len(target)
 ```
 #### Csharp
 ```csharp
@@ -35,7 +56,8 @@ public class Solution {
             if (l1 > l2 || (l1 == l2 && longestWord.CompareTo(target) < 0)) {
                 continue;
             }
-            if (isSubstr(s, target)) {
+            //add this if isSubstr is public
+            if (isSubstr(s, target)) {         
                 longestWord = target;
             }
         }
