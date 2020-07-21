@@ -133,8 +133,15 @@ def QuickSort(arry:list, left:int, right:int):
 ```
 ### 7 Heap Sort
 Heap:  
-Complete binary tree  
-parent > children
+Complete binary tree (Using array could be ensure this tree is complete binsry tree.)  
+parent > children  
+formula:  
+parent = (i-1)/2  
+children1 = 2*i+1  
+children2 = 2*i+2  
+
+
 
 #### Reference
-https://www.runoob.com/w3cnote/ten-sorting-algorithm.html
+https://www.runoob.com/w3cnote/ten-sorting-algorithm.html  
+https://www.youtube.com/watch?v=j-DqQcNPGbE
