@@ -25,13 +25,13 @@ class Solution:
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
         if not intervals:
             return 0
-        intervals.sort(key=lambda x: x[1])
+        intervals.sort(key=lambda x: x[0]) # if sort by end then remove the one with smaller start
         res=0
         pre=0
         for i in range(1, len(intervals)):
-            if intervals[i][0] < intervals[pre][1]:
+            if intervals[i][0] < intervals[pre][1]: # remove
                 res=res+1
-                if (intervals[i][1] < intervals[pre][1]):
+                if (intervals[i][1] < intervals[pre][1]): # remove the one with bigger end
                     pre = i
             else:
                 pre = i
