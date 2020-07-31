@@ -14,7 +14,7 @@ Alogrithm
 Data Structure  
 
 Reference  
-[https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode%20%E9%A2%98%E8%A7%A3%20-%20%E7%9B%AE%E5%BD%95.md]   
+https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode%20%E9%A2%98%E8%A7%A3%20-%20%E7%9B%AE%E5%BD%95.md   
 
 #### 2. Algorithm Pattern
 Data Structure  
@@ -22,9 +22,9 @@ Basic Algorithm
 Advanced Algorithm  
 
 Reference  
-[https://github.com/dashidhy/algorithm-pattern-python]  
+https://github.com/dashidhy/algorithm-pattern-python  
 
 #### 3. Top 100
 Reference  
-[https://leetcode.com/problemset/top-100-liked-questions/]  
+https://leetcode.com/problemset/top-100-liked-questions/  
 
