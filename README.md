@@ -28,3 +28,6 @@ https://github.com/dashidhy/algorithm-pattern-python
 Reference  
 https://leetcode.com/problemset/top-100-liked-questions/  
 
+#### 4. Sorting
+Reference  
+https://www.runoob.com/w3cnote/ten-sorting-algorithm.html  
