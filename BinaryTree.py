@@ -43,12 +43,37 @@ def inOrder(root):
         inOrder(root.right)
 
 
-#DFS-postorder后续
+#DFS-postorder后序
 def postorder(root):
     if root != None:
         postorder(root.left)
         postorder(root.right)
         print(root.val, end=" ")
+
+#BFS-breadth广度
+def levelOrder(root):
+    res = []
+    if root is None:
+        return res
+    # 模拟一个队列储存节点
+    q = []
+    # 首先将根节点入队
+    q.append(root)
+    # 列表为空时，循环终止
+    while len(q) != 0:
+        length = len(q)
+        for i in range(length):
+            # 将同层节点依次出队
+            r = q.pop(0)
+            if r.left is not None:
+                # 非空左孩子入队
+                q.append(r.left)
+            if r.right is not None:
+                # 非空右孩子入队
+                q.append(r.right)
+            res.append(r.value)
+            print(r.value)
+    return res
 
 
 if __name__ == '__main__':
