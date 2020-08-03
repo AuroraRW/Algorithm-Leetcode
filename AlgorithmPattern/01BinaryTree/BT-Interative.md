@@ -7,6 +7,7 @@ Inorder
 Postorder  
 
 ### 1. Recursion Template
+![title](01.png)
 <details>
   <summary>Python</summary>  
 
@@ -42,7 +43,7 @@ def postorder_rec(root):
 #### Preorder Traversal 
 [Leetcode No144](https://leetcode.com/problems/binary-tree-preorder-traversal/)  
 
-Using stack
+Using stack  
 ![title](01.png)
 <details>
   <summary>Python</summary>
