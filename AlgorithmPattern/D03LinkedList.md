@@ -48,7 +48,6 @@ Output: 2->3
 <details>
   <summary>Solution</summary>
 
-![title](./images/PD02-01.png)
 ```Python
 class Solution:
     def deleteDuplicates(self, head: ListNode) -> ListNode:
