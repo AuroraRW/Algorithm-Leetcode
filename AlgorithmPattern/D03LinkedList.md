@@ -1,5 +1,8 @@
 # Linked List
-Ref: https://www.youtube.com/watch?v=1I82s08OE0c
+Ref:  
+https://www.youtube.com/watch?v=1I82s08OE0c
+https://www.bilibili.com/s/video/BV1g4411z7uN
+
 
 ## **1. Introduction**
 
@@ -48,6 +51,8 @@ Output: 2->3
 <details>
   <summary>Solution</summary>
 
+![title](./images/PD03-01.png)
+
 ```Python
 class Solution:
     def deleteDuplicates(self, head: ListNode) -> ListNode:
@@ -78,28 +83,30 @@ class Solution:
 <details>
   <summary>Solution</summary>
 
-> 反转一个单链表。
-
-- 思路：将当前结点放置到头结点
+- Before
+![title](./images/PD03-02.png)  
+- After  
+![title](./images/PD03-03.png)
 
 ```Python
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        
         if head is None:
             return head
-        
-        tail = head
-        while tail.next is not None:
-            # put tail.next to head  
-            tmp = tail.next
-            tail.next = tail.next.next
-            tmp.next = head
-            head = tmp
-        
-        return head
+        preNode=None
+        curNode=head
+        while curNode is not None:
+            # move nextNode at beginning of each loop
+            nextNode=curNode.next
+            curNode.next=preNode
+            preNode=curNode
+            curNode=nextNode
+            
+        return preNode
 ```
-- Recursive method is tricky
+- Recursive method  
+![title](./images/PD03-04.png)
+
 ```Python
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
@@ -118,12 +125,11 @@ class Solution:
 #### reverse-linked-list-ii
 [Leetcode No92](https://leetcode.com/problems/reverse-linked-list-ii/)
 <details>
-  <summary>Solution</summary>
+  <summary>Solution???</summary>
 
 > 反转从位置  *m*  到  *n*  的链表。请使用一趟扫描完成反转。
 
 思路：先找到 m 处, 再反转 n - m 次即可
-
 ```Python
 class Solution:
     def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:

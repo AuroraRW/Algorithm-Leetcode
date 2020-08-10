@@ -29,3 +29,17 @@ https://leetcode.com/problemset/top-100-liked-questions/
 #### 4. Sorting
 Reference  
 https://www.runoob.com/w3cnote/ten-sorting-algorithm.html  
+
+-----------------------
+
+#### Useful Link
+https://blog.csdn.net/fuxuemingzhu/category_5790037.html
+https://www.cnblogs.com/grandyang/
+
+#### Question list
+https://cspiration.com/leetcodeClassification
+https://leel0330.github.io/leetcode/
+
+
+
+
