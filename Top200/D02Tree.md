@@ -299,28 +299,166 @@ class Solution:
 [Leetcode No404](https://leetcode.com/problems/sum-of-left-leaves/)
 <details>
   <summary>Solution</summary>
-  
+
+ ```python
+ class Solution:
+    result=0
+    def sumOfLeftLeaves(self, root: TreeNode) -> int:
+        if root is None:
+            return 0
+        
+        def SumLeavesLeft(root):
+            if root.left is None and root.right is None:
+                self.result+=root.val
+                return
+            elif root.left is None:
+                SumLeavesRight(root.right)
+            elif root.right is None:
+                SumLeavesLeft(root.left)
+            else:
+                SumLeavesLeft(root.left)
+                SumLeavesRight(root.right)
+            
+        def SumLeavesRight(root):
+            if root.left is None and root.right is None:
+                return
+            elif root.left is None:
+                SumLeavesRight(root.right)
+            elif root.right is None:
+                SumLeavesLeft(root.left)
+            else:
+                SumLeavesLeft(root.left)
+                SumLeavesRight(root.right)
+                
+        if root.left is None and root.right is None:
+            return 0
+        elif root.left is None:
+            SumLeavesRight(root.right)
+        elif root.right is None:
+            SumLeavesLeft(root.left)
+        else:
+            SumLeavesLeft(root.left)
+            SumLeavesRight(root.right)
+        
+        return self.result
+ ``` 
+ ```python
+ class Solution:
+    def sumOfLeftLeaves(self, root: TreeNode) -> int:
+        if root is None:
+            return 0
+        
+        def isLeaf(root):
+            if root is None:
+                return False
+            return root.left is None and root.right is None
+        
+        if isLeaf(root.left):
+            return root.left.val + self.sumOfLeftLeaves(root.right)
+        return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
+ ```
 </details>
 
 #### longest-univalue-path
 [Leetcode No687](https://leetcode.com/problems/longest-univalue-path/)
 <details>
   <summary>Solution</summary>
-  
+
+![title](./images/PD02-06.png)
+```python
+class Solution:
+    result=0
+    def longestUnivaluePath(self, root: TreeNode) -> int:
+        if root is None:
+            return 0
+        
+        def Path(root):
+            if root is None:
+                return 0
+            left=Path(root.left)
+            right=Path(root.right)
+            
+            # if the value is not equal, then 0
+            left_temp=0
+            right_temp=0
+
+            #record one branch
+            if root.left is not None and root.left.val==root.val:
+                left_temp=left+1
+            if root.right is not None and root.right.val==root.val:
+                right_temp=right+1
+            
+            self.result= max(self.result, left_temp+right_temp)
+            return max(left_temp,right_temp)
+        
+        Path(root)
+        
+        return self.result  
+```  
 </details>
 
 #### house-robber-iii
 [Leetcode No337](https://leetcode.com/problems/house-robber-iii/)
 <details>
   <summary>Solution</summary>
-  
+
+```python
+class Solution:
+    def rob(self, root: TreeNode) -> int:
+        
+        def dfs(root):
+            
+            # it is not necessary to skip only one level
+            if not root: return (0, 0)
+            left=dfs(root.left)
+            right=dfs(root.right)
+            # rob this node, left[1] means not rob left child
+            rob = root.val + left[1] + right[1]
+            # not rob this node, then look at his children
+            # maximum of left[0] and left[1]
+            notrob = max(left) + max(right)            
+            return (rob, notrob)
+        
+        return max(dfs(root))
+```
 </details>
 
 #### second-minimum-node-in-a-binary-tree
 [Leetcode No671](https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/)
 <details>
-  <summary>Solution</summary>
-  
+  <summary>Solution - DFS</summary>
+
+```python
+class Solution:
+    def findSecondMinimumValue(self, root: TreeNode) -> int:
+        if root is None:
+            return -1
+        if root.left is None and root.right is None:
+            return -1
+        
+        leftValue = root.left.val
+        rightValue = root.right.val
+        
+        # search the child having the same value with the current node 
+        if leftValue == root.val:
+            leftValue= self.findSecondMinimumValue(root.left)
+        if rightValue == root.val:
+            rightValue=self.findSecondMinimumValue(root.right)
+        
+        if leftValue != -1 and rightValue !=-1:
+            return min(leftValue,rightValue)
+        if leftValue !=-1:
+            return leftValue
+        else:
+            return rightValue
+```
+</details>
+
+<details>
+  <summary>Solution - BFS</summary>
+
+```python
+```
 </details>
 
 ## **Binary Tree Traversal**
@@ -502,7 +640,23 @@ class Solution:
 [Leetcode No513](https://leetcode.com/problems/find-bottom-left-tree-value/)
 <details>
   <summary>Solution</summary>
-  
+
+```python
+class Solution:
+    def findBottomLeftValue(self, root: TreeNode) -> int:
+        if root is None:
+            return root
+        q=[]
+        q.append(root)
+        while len(q)!=0:
+            node=q.pop(0)
+            if node.right!= None:
+                q.append(node.right)
+            if node.left!=None:
+                q.append(node.left)
+        # return the last one of the queue        
+        return node.val
+```  
 </details>
 
 ## **BST**
@@ -510,48 +664,181 @@ class Solution:
 [Leetcode No669](https://leetcode.com/problems/trim-a-binary-search-tree/)
 <details>
   <summary>Solution</summary>
-  
+
+```python
+class Solution:
+    def trimBST(self, root: TreeNode, L: int, R: int) -> TreeNode:
+        if root is None:
+            return root
+        if root.val > R:
+            return self.trimBST(root.left, L, R)
+        if root.val < L:
+            return self.trimBST(root.right, L, R)
+        
+        # connect the left subtree to becoming the left child of root
+        root.left = self.trimBST(root.left, L, R)
+        # connect the right subtree to becoming the right child of root
+        root.right = self.trimBST(root.right, L, R)
+        
+        return root
+```  
 </details>
 
 #### kth-smallest-element-in-a-bst
 [Leetcode No230](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
 <details>
   <summary>Solution</summary>
-  
+
+```python
+class Solution:
+    count=0
+    result=float('-inf')
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        
+        def inorder(root):
+            if root is None:
+                return
+            inorder(root.left)
+            self.count+=1
+            if self.count==k:
+                self.result=root.val
+                return
+            inorder(root.right)
+        
+        inorder(root)
+        return self.result
+```  
 </details>
 
 #### convert-bst-to-greater-tree
 [Leetcode No538](https://leetcode.com/problems/convert-bst-to-greater-tree/)
 <details>
   <summary>Solution</summary>
-  
+
+```python
+class Solution:
+    sumValue=0
+    def convertBST(self, root: TreeNode) -> TreeNode:
+        if root is None:
+            return
+        def greaterTree(root):
+            if root is None:
+                return
+            greaterTree(root.right)
+            self.sumValue+=root.val
+            root.val=self.sumValue
+            greaterTree(root.left)
+            
+        
+        greaterTree(root)
+        return root
+```  
 </details>
 
 #### lowest-common-ancestor-of-a-binary-search-tree
 [Leetcode No235](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
 <details>
   <summary>Solution</summary>
-  
+
+```python
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root is None:
+            return
+        if root.val<p.val and root.val<q.val:
+            return self.lowestCommonAncestor(root.right, p, q)
+        if root.val>p.val and root.val>q.val:
+            return self.lowestCommonAncestor(root.left, p, q)
+        return root
+```  
 </details>
 
 #### lowest-common-ancestor-of-a-binary-tree
 [Leetcode No236](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 <details>
   <summary>Solution</summary>
-  
+
+```python
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        
+        if root is None:
+            return None
+        
+        if root == p or root == q:
+            return root
+        
+        left=self.lowestCommonAncestor(root.left,p,q)
+        right=self.lowestCommonAncestor(root.right,p,q)
+        
+        if left is not None and right is not None:
+            return root
+        elif left is not None:
+            return left
+        elif right is not None:
+            return right
+        else:
+            return None
+```  
 </details>
 
 #### convert-sorted-array-to-binary-search-tree
 [Leetcode No108](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
 <details>
   <summary>Solution</summary>
-  
+
+```python
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
+        def createBST(nums, start, end):
+            if start>end:
+                return None
+            mid=(start+end)//2
+            root=TreeNode(nums[mid])
+            root.left=createBST(nums, start, mid-1)
+            root.right=createBST(nums, mid+1, end)
+            
+            return root 
+        
+        return createBST(nums,0,len(nums)-1)
+```  
 </details>
 
 #### convert-sorted-list-to-binary-search-tree
 [Leetcode No109](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/)
 <details>
   <summary>Solution</summary>
+
+1. convert list to array, then the same as N108
+2. use two pointers, slow and fast to find middle node
+```python
+class Solution:
+    def sortedListToBST(self, head: ListNode) -> TreeNode:
+        if head is None:
+            return head
+        # could not return head, because the head is a list node
+        if head.next is None:
+            return TreeNode(head.val)
+        # mid, fast is two pointers, last is for cutting the list
+        fast = head
+        mid = head
+        last = mid
+        
+        while fast.next and fast.next.next:
+            last = mid
+            mid = mid.next
+            fast = fast.next.next
+        
+        fast = mid.next
+        last.next = None
+        
+        node =TreeNode(mid.val)
+        if mid != head:
+            node.left = self.sortedListToBST(head)
+        node.right = self.sortedListToBST(fast)
+        
+        return node
+```
   
 </details>
 
