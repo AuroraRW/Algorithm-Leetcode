@@ -846,22 +846,85 @@ class Solution:
 [Leetcode No653](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/)
 <details>
   <summary>Solution</summary>
-  
+
+```python
+class Solution:
+    def findTarget(self, root: TreeNode, k: int) -> bool:
+        
+        result = set()
+        def preOrder(root):
+            if not root:
+                return False
+            
+            if k - root.val in result:
+                return True
+            result.add(root.val)
+            
+            return preOrder(root.left) or preOrder(root.right)
+        
+        return preOrder(root)  
+```
 </details>
 
 #### minimum-absolute-difference-in-bst
 [Leetcode No530](https://leetcode.com/problems/minimum-absolute-difference-in-bst/)
 <details>
   <summary>Solution</summary>
-  
+
+```python
+# Inorder traversal, because it is ordered, compare two adjacent nodes
+class Solution:
+    prenode=None
+    def getMinimumDifference(self, root: TreeNode) -> int:
+        
+        def inorder(root, minvalue):
+            if root is None:
+                return minvalue
+            minvalue=inorder(root.left, minvalue)
+            if self.prenode is not None:
+                minvalue=min(minvalue, abs(self.prenode.val-root.val))
+            self.prenode=root
+            minvalue=inorder(root.right,minvalue)
+            
+            return minvalue
+        
+        return inorder(root, float('inf'))
+```  
 </details>
 
 #### find-mode-in-binary-search-tree
 [Leetcode No501](https://leetcode.com/problems/find-mode-in-binary-search-tree/)
 <details>
   <summary>Solution</summary>
-  
+
+ ```python
+ class Solution:
+    #count = collections.Counter()
+    def findMode(self, root: TreeNode) -> List[int]:     
+
+        if root is None:
+            return []
+        
+        self.count = collections.Counter()
+        self.inorder(root)
+        
+        m = max(self.count.values())
+        result = []
+        for k, v in self.count.items():
+            if v == m:
+                result.append(k)
+        return result
+    
+    def inorder(self, root):
+            if root is None:
+                return 
+            self.inorder(root.left)
+            self.count[root.val] += 1
+            self.inorder(root.right)
+ ``` 
 </details>
+
+## **Tire**
 
 ## **Summary**
 - **Binary tree traversal-DFS(preorder, inorder, postorder):**   
