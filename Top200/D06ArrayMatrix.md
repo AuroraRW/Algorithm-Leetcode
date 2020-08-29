@@ -137,7 +137,7 @@ class Solution:
 #### kth-smallest-element-in-a-sorted-matrix 
 [Leetcode No378](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/)
 <details>
-  <summary>Solution</summary>
+  <summary>Solution??</summary>
   
 ```python
 ```
@@ -149,6 +149,12 @@ class Solution:
   <summary>Solution</summary>
   
 ```python
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        table = [0] * len(nums)
+        for i in range(len(nums)):
+            table[nums[i] - 1] += 1
+        return [table.index(2) + 1, table.index(0) + 1]
 ```
 </details>
 
@@ -158,13 +164,19 @@ class Solution:
   <summary>Solution</summary>
   
 ```python
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        d=dict(Counter(nums))
+        for k in d.keys():
+            if d[k]>=2:
+                return k
 ```
 </details>
 
 #### beautiful-arrangement-ii 
 [Leetcode No667](https://leetcode.com/problems/beautiful-arrangement-ii/)
 <details>
-  <summary>Solution</summary>
+  <summary>Solution???</summary>
   
 ```python
 ```
@@ -176,6 +188,29 @@ class Solution:
   <summary>Solution</summary>
   
 ```python
+class Solution:
+    def findShortestSubArray(self, nums: List[int]) -> int:
+        d=dict(Counter(nums))
+        m=max(d.values())
+        # the number with the maximum appearance
+        value=[]
+        for k in d.keys():
+            if d[k]==m:
+                value.append(k)
+        cnt=0
+        # save the start and end position of all numbers
+        start=dict()
+        end=dict()
+        for i, num in enumerate(nums):
+            if num not in start:
+                start[num] = i
+            end[num] = i
+            
+        result=float('inf')
+        for i in value:
+            result=min(result, end[i]-start[i]+1)
+            
+        return result
 ```
 </details>
 
@@ -185,6 +220,13 @@ class Solution:
   <summary>Solution</summary>
   
 ```python
+# The numbers from back in second row is the same as the numbers from front in first row 
+class Solution:
+    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
+        for row in range(len(matrix)-1):
+            if matrix[row+1][1:] != matrix[row][:-1]:
+                return False
+        return True
 ```
 </details>
 
