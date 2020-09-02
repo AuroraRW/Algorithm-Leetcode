@@ -72,4 +72,4 @@ class Solution:
                     result.append(root)
         return result
 ```
-<details>
+</details>
